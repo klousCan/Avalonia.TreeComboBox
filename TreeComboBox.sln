@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeComboBox", "TreeComboBox\TreeComboBox.csproj", "{85EB5CB9-C409-478C-947D-C41CF204EDC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeComboBox.Demo", "TreeComboBox.Demo\TreeComboBox.Demo.csproj", "{C152BE53-7E20-4756-8CB6-6D82B1AF7648}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85EB5CB9-C409-478C-947D-C41CF204EDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85EB5CB9-C409-478C-947D-C41CF204EDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85EB5CB9-C409-478C-947D-C41CF204EDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85EB5CB9-C409-478C-947D-C41CF204EDC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C152BE53-7E20-4756-8CB6-6D82B1AF7648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C152BE53-7E20-4756-8CB6-6D82B1AF7648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C152BE53-7E20-4756-8CB6-6D82B1AF7648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C152BE53-7E20-4756-8CB6-6D82B1AF7648}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C20D295D-3E91-4704-AB29-8F00BB7C4F19}
+	EndGlobalSection
+EndGlobal

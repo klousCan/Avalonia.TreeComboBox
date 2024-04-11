@@ -1,0 +1,124 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:Avalonia.TreeComboBox.Controls">
+    <!-- Add Resources Here -->
+    <ControlTheme x:Key="{x:Type control:TreeComboBox}" TargetType="control:TreeComboBox">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="Calendar">
+                <Grid ColumnDefinitions="*,12,32">
+                    <Border
+                        x:Name="Background"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        MinWidth="{DynamicResource ComboBoxThemeMinWidth}"
+                        MinHeight="{DynamicResource ComboBoxDefaultHeight}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}" />
+                    <StackPanel Grid.Column="0" >
+                        <TextBox
+                            x:Name="ComboBoxText"
+                            Margin="{TemplateBinding Padding}"
+                            Width="{Binding $parent.Bounds.Width}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Watermark="{Binding $parent[control:TreeComboBox].PlaceholderText}"
+                            Foreground="{TemplateBinding Foreground}"
+                            IsVisible="{Binding $parent[control:TreeComboBox].SelectText,Converter={x:Static StringConverters.IsNullOrEmpty}}">
+                        </TextBox>
+                        <TextBox
+                            Width="{Binding $parent.Bounds.Width}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Foreground="{TemplateBinding Foreground}"
+                            IsVisible="{Binding $parent[control:TreeComboBox].SelectText,Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                            Text="{Binding $parent[control:TreeComboBox].SelectText}">
+                        </TextBox>
+                    </StackPanel>
+                    <Border
+                        x:Name="DropDownOverlay"
+                        Grid.Column="1"
+                        Width="30"
+                        Margin="0,1,1,1"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        IsVisible="False" />
+                    <Button Grid.Column="1" Width="12"
+                            Name="ClearButton"
+                            Tag="{TemplateBinding Name}"
+                            DockPanel.Dock="Right"
+                            Background="Transparent"
+                            Command="{Binding $parent[control:TreeComboBox].Clear}"
+                            IsVisible="{Binding $parent[control:TreeComboBox].SelectedItem,
+                                                        Converter={x:Static ObjectConverters.IsNotNull}}"
+                            Height="12">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border>
+                                    <PathIcon Data="{StaticResource TextBoxClearButtonData}"
+                                              Foreground="{DynamicResource ComboBoxIconDefaultForeground}"
+                                              Width="12"
+                                              Height="12">
+                                    </PathIcon>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Styles>
+                            <Style Selector="Button:pointerover">
+                                <Setter Property="Background" Value="Transparent">
+                                </Setter>
+                            </Style>
+                        </Button.Styles>
+                    </Button>
+
+                    <PathIcon
+                        x:Name="DropDownGlyph"
+                        Grid.Column="2"
+                        Width="12"
+                        Height="12"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Data="{DynamicResource ComboBoxIcon}"
+                        Foreground="{DynamicResource ComboBoxIconDefaultForeground}"
+                        IsHitTestVisible="False"
+                        UseLayoutRounding="False" />
+
+                    <Popup
+                        Name="PART_Popup"
+                        Grid.Column="0"
+                        MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                        MaxHeight="300"
+                        ClipToBounds="False"
+                        InheritsTransform="True"
+                        IsLightDismissEnabled="True"
+                        PlacementTarget="Background"
+                        IsOpen="{Binding $parent[control:TreeComboBox].IsDropDownOpen,
+                                                     Mode=TwoWay}"
+                        WindowManagerAddShadowHint="False">
+                        <Border
+                            x:Name="PopupBorder"
+                            Margin="0,4"
+                            HorizontalAlignment="Stretch"
+                            Background="{DynamicResource ComboBoxPopupBackground}"
+                            BorderBrush="{DynamicResource ComboBoxPopupBorderBrush}"
+                            BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
+                            BoxShadow="{DynamicResource ComboBoxPopupBoxShadow}"
+                            ClipToBounds="True"
+                            CornerRadius="6">
+                            <ScrollViewer
+                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <ItemsPresenter
+                                    Name="PART_ItemsPresenter"
+                                    Margin="{DynamicResource ComboBoxDropdownContentMargin}" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

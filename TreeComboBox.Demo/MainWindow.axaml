@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Avalonia.TreeComboBox.Controls;assembly=TreeComboBox"
+        xmlns:demo="clr-namespace:TreeComboBox.Demo"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TreeComboBox.Demo.MainWindow"
+        Title="TreeComboBox.Demo"
+        x:DataType="demo:TreeViewVm">
+    <StackPanel Spacing="10" Height="300" VerticalAlignment="Center" Margin="20">
+        <controls:TreeComboBox
+            Background="#FFFFFF"
+            BorderBrush="Gray"
+            OwenTextChanged="TreeComboBox_OnTextChanged"
+            BorderThickness="2"
+            PlaceholderText="请选择xxxx"
+            ItemsSource="{Binding Items}"
+            SelectionChanged="TreeView_OnSelectionChanged"
+            DisplayMember="Name"
+            LeafMember="">
+            <TreeView.ItemTemplate>
+                <TreeDataTemplate ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Name}" />
+                </TreeDataTemplate>
+            </TreeView.ItemTemplate>
+            <controls:TreeComboBox.Styles>
+                <Style Selector="TextBox">
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+                <Style Selector="TextBox:pointerover  /template/ Border#PART_ContentPresenterBorder">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+            </controls:TreeComboBox.Styles>
+        </controls:TreeComboBox>
+        <controls:TreeComboBox
+            Background="#FFFFFF"
+            BorderBrush="Gray"
+            OwenTextChanged="TreeComboBox_OnTextChanged"
+            BorderThickness="2"
+            PlaceholderText="请选择xxxx只能选中子节点"
+            ItemsSource="{Binding Items}"
+            SelectionChanged="TreeView_OnSelectionChanged"
+            DisplayMember="Name"
+            LeafMember="leaf">
+            <TreeView.ItemTemplate>
+                <TreeDataTemplate ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Name}" />
+                </TreeDataTemplate>
+            </TreeView.ItemTemplate>
+            <controls:TreeComboBox.Styles>
+                <Style Selector="TextBox">
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+                <Style Selector="TextBox:pointerover  /template/ Border#PART_ContentPresenterBorder">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+            </controls:TreeComboBox.Styles>
+        </controls:TreeComboBox>
+    </StackPanel>
+</Window>
