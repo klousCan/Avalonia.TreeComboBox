@@ -19,6 +19,8 @@ public class TreeComboBox : TreeView
 
     private object? _selectItem;
 
+    private volatile bool _isLastSelectLeaf = true;
+
     public TreeComboBox()
     {
         TemplateApplied += (sender, args) =>
@@ -76,18 +78,34 @@ public class TreeComboBox : TreeView
                     int.TryParse(property.GetValue(item).ToString(), out var leaf);
                     if (leaf == 0)
                     {
+                        //当前选中不是叶子节点，但是也需要给当前SelectedItem赋值，
+                        //那么怎么在给赋值的时候不重新触发
+                        _isLastSelectLeaf = false;
                         SelectedItem = _selectItem;
                         args.Handled = true;
                         return;
                     }
+                    else if(!_isLastSelectLeaf)
+                    {
+                        _isLastSelectLeaf = SelectedItem != _selectItem;
+                    }
 
+                    if (this.IsDropDownOpen && _isLastSelectLeaf)
+                        this.SetCurrentValue<bool>(TreeComboBox.IsDropDownOpenProperty, !this.IsDropDownOpen);
                     _selectItem = SelectedItem;
+                    _isLastSelectLeaf = true;
                 }
+            }
+            else
+            {
+                if (this.IsDropDownOpen)
+                    this.SetCurrentValue<bool>(TreeComboBox.IsDropDownOpenProperty, !this.IsDropDownOpen);
             }
 
             SetDisplay(item);
         };
     }
+
 
     private void SetDisplay(object item)
     {
@@ -211,7 +229,8 @@ public class TreeComboBox : TreeView
             }
             else
             {
-                this.SetCurrentValue<bool>(TreeComboBox.IsDropDownOpenProperty, !this.IsDropDownOpen);
+                if (!this.IsDropDownOpen)
+                    this.SetCurrentValue<bool>(TreeComboBox.IsDropDownOpenProperty, !this.IsDropDownOpen);
                 e.Handled = true;
             }
         }

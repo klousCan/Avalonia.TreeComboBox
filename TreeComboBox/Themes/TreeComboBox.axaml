@@ -109,6 +109,7 @@
                             ClipToBounds="True"
                             CornerRadius="6">
                             <ScrollViewer
+                                Width="200"
                                 HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                 VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                 <ItemsPresenter
